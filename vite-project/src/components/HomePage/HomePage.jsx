@@ -5,10 +5,12 @@ import Miniview from "./Miniview/Miniview";
 const HomePage = () => {
   return (
     <Grid sx={{ mt: "65px" }} container>
-      <p>
+      <Grid>
         <AlertTitle>Home pages</AlertTitle>
+      </Grid>
+      <Grid>
         <Miniview />
-      </p>
+      </Grid>
     </Grid>
   );
 };
