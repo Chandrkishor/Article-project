@@ -12,8 +12,8 @@ const HomePage = () => {
       <Grid>
         {articles.map((item) => {
           return (
-            <Box sx={{ mb: 1 }}>
-              <MiniView key={item._id} data={item} />
+            <Box sx={{ mb: 1 }} key={item._id}>
+              <MiniView data={item} />
             </Box>
           );
         })}
