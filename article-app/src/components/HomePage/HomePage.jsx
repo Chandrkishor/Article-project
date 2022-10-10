@@ -1,6 +1,7 @@
-import { AlertTitle, Box, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React from "react";
-import MiniView from "./MiniView/MiniView";
+import MiniView from "./Miniview/Miniview";
+
 import data from "./data.json";
 
 const HomePage = () => {

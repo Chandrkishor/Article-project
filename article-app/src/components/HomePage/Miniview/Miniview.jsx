@@ -62,10 +62,10 @@ const MiniView = ({ data = {} }) => {
               {para}
             </Typography>
             <Grid sx={{ display: "flex", flexDirection: "row" }}>
-              <Button size="small" onClick={handleClose}>
+              <Button variant="outlined" size="small" onClick={handleClose}>
                 close
               </Button>
-              <Button size="small" onClick={handleEdit}>
+              <Button variant="contained" size="small" onClick={handleEdit}>
                 Edit
               </Button>
             </Grid>
