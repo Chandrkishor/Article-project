@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
-import { Grid } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -56,19 +55,19 @@ const MiniView = ({ data = {} }) => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              {title}
+              "title"
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {para}
+              "para"
             </Typography>
-            <Grid sx={{ display: "flex", flexDirection: "row" }}>
-              <Button size="small" onClick={handleClose}>
-                close
-              </Button>
-              <Button size="small" onClick={handleEdit}>
-                Edit
-              </Button>
-            </Grid>
+          </Box>
+          <Box>
+            <Button size="small" onClick={handleClose}>
+              close
+            </Button>
+            <Button size="small" onClick={handleEdit}>
+              Edit
+            </Button>
           </Box>
         </Modal>
       </div>
