@@ -4,22 +4,14 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 import { useState } from "react";
-import { Grid } from "@mui/material";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 600,
-  bgcolor: "background.paper",
-  // border: "2px solid #000",
-  // boxShadow: 24,
-  p: 2,
-};
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const MiniView = ({ data = {} }) => {
   const { title, para, _id } = data;
@@ -28,12 +20,24 @@ const MiniView = ({ data = {} }) => {
   // console.log(title, para);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleEdit = () => {
-    console.log("This handle edit function");
+
+  const descriptionElementRef = useRef(null);
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
+  const handleEdit = (data) => {
+    console.log(data, "This handle edit function");
+    handleClose();
   };
   return (
     <>
-      <Card sx={{ minWidth: 275, maxWidth: "600px" }}>
+      <Card sx={{ minWidth: 350, maxWidth: "600px" }}>
         <CardContent>
           <Typography
             sx={{ fontSize: 16, fontWeight: 600, textTransform: "capitalize" }}
@@ -44,7 +48,12 @@ const MiniView = ({ data = {} }) => {
           </Typography>
           <Typography
             variant="body2"
-            sx={{ maxHeight: "150px", overflow: "scroll", overflowX: "hidden" }}
+            sx={{
+              width: "100%",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
             {para}
           </Typography>
@@ -57,54 +66,45 @@ const MiniView = ({ data = {} }) => {
       </Card>
 
       <div>
-        <Modal
+        <Dialog
           open={open}
           onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          elevation={9}
-          sx={{
-            maxHeight: "450px",
-            overflow: "scroll",
-            overflowX: "scroll",
-            mt: 2,
-            p: 4,
-          }}
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
         >
-          <Box sx={style}>
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              component="h2"
-              sx={{ textTransform: "capitalize" }}
+          <DialogTitle
+            id="scroll-dialog-title"
+            sx={{ textTransform: "capitalize" }}
+          >
+            {title}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              tabIndex={-1}
+              sx={{ textAlign: "justify" }}
             >
-              {title}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {para}
-            </Typography>
-            <Grid
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                mt: 3,
-                justifyContent: "flex-end",
-              }}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleClose}
+              variant={"outlined"}
+              className="button"
             >
-              <Button variant="outlined" size="small" onClick={handleClose}>
-                close
-              </Button>
-              <Button
-                variant="contained"
-                size="small"
-                onClick={handleEdit}
-                sx={{ marginLeft: 2 }}
-              >
-                Edit
-              </Button>
-            </Grid>
-          </Box>
-        </Modal>
+              Close
+            </Button>
+            <Button
+              onClick={() => handleEdit(data)}
+              variant={"contained"}
+              className="button"
+            >
+              Edit
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </>
   );

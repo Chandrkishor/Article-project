@@ -7,18 +7,25 @@ import data from "./data.json";
 const HomePage = () => {
   const { articles } = data;
   return (
-    <Grid sx={{ mt: "65px" }} container>
-      <h3>Home pages</h3>
-      <Grid>
+    <div
+      style={{
+        marginTop: "80px",
+        display: "flex",
+        justifyContent: "center",
+        // width: "100%",
+      }}
+    >
+      {/* <h3>Your Articles</h3> */}
+      <div>
         {articles.map((item) => {
           return (
-            <Box sx={{ mb: 1 }} key={item._id}>
+            <div style={{ marginBottom: "10px" }} key={item._id}>
               <MiniView data={item} />
-            </Box>
+            </div>
           );
         })}
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
